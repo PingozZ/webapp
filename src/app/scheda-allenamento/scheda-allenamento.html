@@ -1,0 +1,87 @@
+<div class="container">
+<mat-card>
+  <h2>Benvenuto! Inserisci le tue informazioni</h2>
+
+  <!-- Dati fisici -->
+  <h3>🏋️‍♂️ Dati fisici</h3>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nome</mat-label>
+    <input matInput type="text" [(ngModel)]="nome" required>
+  </mat-form-field>
+  
+  <mat-form-field class="full-width">
+    <mat-label>Sesso</mat-label>
+    <mat-select [(ngModel)]="sesso" required>
+      <mat-option value="M">Maschio</mat-option>
+      <mat-option value="F">Femmina</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Età</mat-label>
+    <input matInput type="number" [(ngModel)]="eta" min="10" max="100" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Peso (kg)</mat-label>
+    <input matInput type="number" [(ngModel)]="peso" min="30" max="200" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Altezza (cm)</mat-label>
+    <input matInput type="number" [(ngModel)]="altezza" min="100" max="220" required>
+  </mat-form-field>
+
+  <!-- Obiettivi -->
+  <h3>🎯 Obiettivi di allenamento</h3>
+  <mat-form-field class="full-width">
+    <mat-label>Obiettivi</mat-label>
+    <mat-select [(ngModel)]="obiettivi" multiple required>
+      <mat-option value="massa">Aumento massa muscolare</mat-option>
+      <mat-option value="definizione">Definizione / dimagrimento</mat-option>
+      <mat-option value="resistenza">Aumento resistenza</mat-option>
+      <mat-option value="mantenimento">Mantenimento</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Livello -->
+  <h3>💪 Livello di esperienza</h3>
+  <mat-form-field class="full-width">
+    <mat-label>Livello</mat-label>
+    <mat-select [(ngModel)]="livello" required>
+      <mat-option value="principiante">Principiante</mat-option>
+      <mat-option value="intermedio">Intermedio</mat-option>
+      <mat-option value="avanzato">Avanzato</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Giorni -->
+  <h3>📅 Giorni disponibili</h3>
+  <mat-form-field class="full-width">
+    <mat-label>Giorni</mat-label>
+    <input matInput type="text" [(ngModel)]="giorni" placeholder="Es. 4 sala fitness, 2 cardio">
+  </mat-form-field>
+
+  <!-- Restrizioni -->
+  <h3>🩺 Restrizioni o condizioni mediche</h3>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Restrizioni</mat-label>
+    <textarea matInput rows="3" [(ngModel)]="restrizioni"></textarea>
+  </mat-form-field>
+
+  <!-- Bottone invio -->
+  <button mat-raised-button color="primary" (click)="inviaScheda()">
+    Invia a n8n
+  </button>
+
+  <!-- Risultato da n8n -->
+ <div risultatoN8n class="output">
+  <h3>Risultato da n8n:</h3>
+  <button mat-stroked-button color="accent" (click)="esportaPDF()">
+    Esporta in PDF
+  </button>
+</div>
+</mat-card>
+
+</div>

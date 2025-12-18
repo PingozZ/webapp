@@ -1,0 +1,146 @@
+/* scheda-allenamento.scss */
+
+/* Layout container */
+mat-card {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 16px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 24px 0 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sections spacing */
+.section {
+  margin-bottom: 16px;
+}
+
+/* Form fields */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Inputs */
+input[matInput],
+textarea[matInput] {
+  font-size: 0.95rem;
+}
+
+/* Select */
+mat-select {
+  font-size: 0.95rem;
+}
+
+/* Grouping in two columns on larger screens */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Buttons */
+button[mat-raised-button] {
+  margin-top: 12px;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+}
+
+button[color="primary"] {
+  background: #2962ff; /* Material Blue A700 vibe */
+}
+
+button[color="primary"]:hover {
+  filter: brightness(1.05);
+}
+
+/* Helper text / captions */
+.caption {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+/* JSON output area */
+pre {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 14px 16px;
+  border-radius: 12px;
+  overflow: auto;
+  max-height: 320px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Subtle dividers between sections */
+hr {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin: 16px 0;
+}
+
+/* Emojis in headings aligned nicely */
+h3::before {
+  content: '';
+}
+
+/* Optional: compact spacing for dense forms */
+.compact mat-form-field {
+  margin-bottom: 8px;
+}
+
+.compact button[mat-raised-button] {
+  margin-top: 8px;
+}
+
+/* Accessibility and focus styles */
+:focus-visible {
+  outline: 2px solid #2962ff;
+  outline-offset: 2px;
+}
+
+/* Material overrides for clearer labels */
+.mat-mdc-form-field {
+  --mdc-filled-text-field-container-color: #f8fafc;
+  --mdc-filled-text-field-focus-active-indicator-color: #2962ff;
+}
+
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: #2962ff;
+}
+
+/* Slight spacing under mat-card sections */
+mat-card h3 + mat-form-field,
+mat-card h3 + .form-grid {
+  margin-top: 6px;
+}
