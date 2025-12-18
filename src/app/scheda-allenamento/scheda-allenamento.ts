@@ -7,11 +7,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import html2pdf from 'html2pdf.js';
-
-
-
-
 
 @Component({
   selector: 'app-scheda-allenamento',
@@ -30,26 +25,28 @@ import html2pdf from 'html2pdf.js';
   styleUrls: ['./scheda-allenamento.scss'],
 })
 export class SchedaAllenamento {
+
   // Campi del form
-  nome: string = '';
-  sesso: string = '';
+  nome = '';
+  sesso = '';
   eta: number | null = null;
   peso: number | null = null;
   altezza: number | null = null;
   obiettivi: string[] = [];
-  livello: string = '';
-  giorni: string = '';
-  restrizioni: string = '';
+  livello = '';
+  giorni = '';
+  restrizioni = '';
 
-  // Variabile per mostrare la risposta di n8n
-  risultatoN8n: string | null = null;
+  // ✅ Risultato SEMPRE stringa
+  risultatoN8n: string = '';
 
   private apiUrl = 'http://localhost:8080/webhook/personal-trainer';
 
   constructor(private http: HttpClient) { }
 
+  // 🔹 Invio dati a n8n
   inviaScheda() {
-    const data = {
+    const payload = {
       nome: this.nome,
       sesso: this.sesso,
       eta: this.eta,
@@ -60,48 +57,54 @@ export class SchedaAllenamento {
       giorni: this.giorni,
       restrizioni: this.restrizioni
     };
+
+
+    this.http.post(this.apiUrl, payload, { responseType: 'text' }).subscribe({
+      next: (res: string) => {
+        this.risultatoN8n = res;
+      },
+      error: (err) => {
+        console.error('Errore POST verso n8n:', err);
+        this.risultatoN8n = 'Errore nella generazione del piano.';
+      }
+    });
+
   }
 
-  // ✅ Esporta in PDF
-
+  // 🔹 Esporta in PDF (con pagebreak e gestione testo lungo)
   async esportaPDF() {
-    if (!this.risultatoN8n) return;
+    if (!this.risultatoN8n || this.risultatoN8n.trim().length === 0) {
+      return;
+    }
 
-    // 🔹 Lazy load (riduce bundle + warning)
     const html2pdf = (await import('html2pdf.js')).default;
 
-    // 🔹 Contenitore temporaneo
     const tempDiv = document.createElement('div');
     tempDiv.style.padding = '16px';
     tempDiv.style.fontFamily = 'Arial, sans-serif';
     tempDiv.style.fontSize = '12px';
-    tempDiv.style.lineHeight = '1.4';
+    tempDiv.style.lineHeight = '1.5';
     tempDiv.style.whiteSpace = 'pre-wrap';
     tempDiv.style.wordBreak = 'break-word';
 
-    tempDiv.innerText = this.risultatoN8n; // ✅ più sicuro di innerHTML
+    // 👇 Usa innerHTML per gestire i \n come <br>
+    tempDiv.innerHTML = this.risultatoN8n.replace(/\n/g, '<br>');
 
     document.body.appendChild(tempDiv);
 
-    await html2pdf()
-      .from(tempDiv)
-      .set({
-        margin: 10,
-        filename: 'piano-allenamento.pdf',
-        image: { type: 'jpeg', quality: 0.95 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true
-        },
-        jsPDF: {
-          unit: 'mm',
-          format: 'a4',
-          orientation: 'portrait'
-        }
-      })
-      .save();
+    // 👉 Tipizza le opzioni come any per includere pagebreak
+    const options: any = {
+      margin: 12,
+      filename: 'piano-allenamento.pdf',
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] } // 👈 ora non dà errore
+    };
 
-    // 🧹 Cleanup
+    await (html2pdf() as any).from(tempDiv).set(options).save();
+
     document.body.removeChild(tempDiv);
+
   }
 }
