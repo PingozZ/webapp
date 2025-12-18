@@ -144,3 +144,6 @@ mat-card h3 + mat-form-field,
 mat-card h3 + .form-grid {
   margin-top: 6px;
 }
+.page-break {
+  page-break-before: always;
+}

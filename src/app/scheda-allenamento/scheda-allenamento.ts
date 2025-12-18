@@ -97,10 +97,14 @@ export class SchedaAllenamento {
       margin: 12,
       filename: 'piano-allenamento.pdf',
       image: { type: 'jpeg', quality: 0.95 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 1 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css', 'legacy'] } // 👈 ora non dà errore
+      pagebreak: { mode: 'avoid-all' }
     };
+
+    tempDiv.innerHTML = this.risultatoN8n
+      .replace(/\n/g, '<br>')
+      .replace(/---PAGEBREAK---/g, '<div class="page-break"></div>');
 
     await (html2pdf() as any).from(tempDiv).set(options).save();
 
