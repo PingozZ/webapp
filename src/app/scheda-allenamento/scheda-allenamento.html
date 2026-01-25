@@ -1,0 +1,112 @@
+<div class="container">
+  <mat-card>
+    <h2>Benvenuto! Inserisci le tue informazioni</h2>
+
+    <!-- Dati fisici -->
+    <h3>🏋️‍♂️ Dati fisici</h3>
+
+    <mat-form-field class="full-width">
+      <mat-label>Nome e Cognome</mat-label>
+      <input matInput type="text" [(ngModel)]="nome" required [disabled]="isLoading">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Sesso</mat-label>
+      <mat-select [(ngModel)]="sesso" required [disabled]="isLoading">
+        <mat-option value="M">Maschio</mat-option>
+        <mat-option value="F">Femmina</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Età</mat-label>
+      <input matInput type="number" [(ngModel)]="eta" min="10" max="100" required [disabled]="isLoading">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Peso (kg)</mat-label>
+      <input matInput type="number" [(ngModel)]="peso" min="30" max="200" required [disabled]="isLoading">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Altezza (cm)</mat-label>
+      <input matInput type="number" [(ngModel)]="altezza" min="100" max="220" required [disabled]="isLoading">
+    </mat-form-field>
+
+    <!-- Obiettivi -->
+    <h3>🎯 Obiettivi di allenamento</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Obiettivi</mat-label>
+      <mat-select [(ngModel)]="obiettivi" multiple required [disabled]="isLoading">
+        <mat-option value="massa">Aumento massa muscolare</mat-option>
+        <mat-option value="forza">Aumento forza</mat-option>
+        <mat-option value="ricomposizione">Ricomposizione corporea</mat-option>
+        <mat-option value="definizione">Definizione / dimagrimento</mat-option>
+        <mat-option value="performance">Miglioramento performance atletica</mat-option>
+        <mat-option value="resistenza">Aumento resistenza</mat-option>
+        <mat-option value="mantenimento">Mantenimento</mat-option>
+        <mat-option value="salute">Miglioramento salute generale</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Livello -->
+    <h3>💪 Livello di esperienza</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Livello</mat-label>
+      <mat-select [(ngModel)]="livello" required [disabled]="isLoading">
+        <mat-option value="principiante">Principiante</mat-option>
+        <mat-option value="intermedio">Intermedio</mat-option>
+        <mat-option value="avanzato">Avanzato</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Giorni -->
+    <h3>📅 Giorni disponibili</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Giorni</mat-label>
+      <input matInput type="text" [(ngModel)]="giorni" placeholder="Es. 4 sala fitness, 2 cardio"
+        [disabled]="isLoading">
+    </mat-form-field>
+
+    <!-- Restrizioni -->
+    <h3>🩺 Restrizioni o condizioni mediche</h3>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Restrizioni</mat-label>
+      <textarea matInput rows="3" [(ngModel)]="restrizioni" [disabled]="isLoading"></textarea>
+    </mat-form-field>
+
+    <!-- Bottoni azione -->
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="inviaScheda()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">🚀 Genera Piano</span>
+        <span *ngIf="isLoading">⏳ Generazione in corso...</span>
+      </button>
+
+      <button mat-raised-button color="accent" [routerLink]="['/pagina-update']" [disabled]="isLoading">
+        🔄 Aggiorna Scheda
+      </button>
+    </div>
+
+    <!-- Spinner di caricamento -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Sto generando la tua scheda personalizzata...</p>
+      <p class="loading-subtext">Potrebbe richiedere alcuni minuti</p>
+    </div>
+
+    <!-- Risultato da n8n -->
+    <div *ngIf="risultatoN8n && !isLoading" class="output">
+      <mat-card class="result-card">
+        <mat-card-header>
+          <mat-card-title>✅ Il Tuo Piano di Allenamento</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="button" (click)="esportaPDF()">
+            📄 Esporta in PDF
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+  </mat-card>
+</div>

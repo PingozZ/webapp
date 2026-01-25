@@ -1,0 +1,87 @@
+<div class="update-container">
+
+    <h2>Aggiorna la tua scheda di allenamento</h2>
+
+    <!-- Upload PDF -->
+    <div class="upload-section">
+        <label for="pdfUpload">Carica il PDF della tua scheda attuale:</label>
+        <input type="file" (change)="onFileSelected($event)" accept="application/pdf" [disabled]="isLoading">
+    </div>
+
+    <hr>
+
+    <!-- Valutazione generale -->
+    <h3>Come valuti l'allenamento svolto?</h3>
+
+    <mat-radio-group [(ngModel)]="feedback" [disabled]="isLoading">
+        <mat-radio-button value="troppo-leggero">Troppo leggero</mat-radio-button>
+        <mat-radio-button value="troppo-pesante">Troppo pesante</mat-radio-button>
+        <mat-radio-button value="non-adatto">Non adeguato alle tue esigenze</mat-radio-button>
+    </mat-radio-group>
+
+    <hr>
+
+    <!-- Richieste esplicite -->
+    <h3>Richieste specifiche</h3>
+
+    <mat-selection-list [(ngModel)]="richieste" [disabled]="isLoading">
+        <mat-list-option value="modifica-esercizio">
+            Modifica di un singolo esercizio
+        </mat-list-option>
+
+        <mat-list-option value="modifica-gruppo">
+            Aggiornamento del gruppo muscolare
+        </mat-list-option>
+
+        <mat-list-option value="feedback-difficolta">
+            Feedback generale sulla difficoltà
+        </mat-list-option>
+
+        <mat-list-option value="nuova-scheda">
+            Richiesta di una nuova scheda
+        </mat-list-option>
+    </mat-selection-list>
+
+    <hr>
+
+    <!-- Note aggiuntive -->
+    <h3>Note aggiuntive su richieste specifiche</h3>
+
+    <textarea matInput placeholder="Scrivi qui eventuali dettagli utili..." [(ngModel)]="note" rows="4"
+        class="note-area" [disabled]="isLoading">
+    </textarea>
+
+    <hr>
+
+    <!-- Richiesta nuova scheda -->
+    <mat-slide-toggle [(ngModel)]="richiediNuovaScheda" [disabled]="isLoading">
+        Voglio una nuova scheda personalizzata
+    </mat-slide-toggle>
+
+    <!-- Loading spinner -->
+    <div *ngIf="isLoading" class="loading-section">
+        <mat-spinner diameter="60"></mat-spinner>
+        <p class="loading-text">Elaborazione in corso... Attendere prego.</p>
+    </div>
+
+    <!-- Pulsanti -->
+    <div class="button-row">
+        <button mat-raised-button color="primary" (click)="inviaFeedback()" 
+                [disabled]="isLoading || !pdfFile || !feedback">
+            <mat-icon>send</mat-icon>
+            Invia aggiornamento
+        </button>
+        
+        <button mat-raised-button color="accent" (click)="esportaPDF()" 
+                [disabled]="isLoading || !risultatoN8n || !risultatoN8n.trim()">
+            <mat-icon>picture_as_pdf</mat-icon>
+            Esporta PDF
+        </button>
+
+        <button mat-stroked-button (click)="resetForm()" [disabled]="isLoading">
+            <mat-icon>refresh</mat-icon>
+            Reset
+        </button>
+    </div>
+
+</div>

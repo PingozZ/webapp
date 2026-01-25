@@ -1,0 +1,456 @@
+/* ========================================
+   🎨 PALETTE & TOKENS
+======================================== */
+$color-primary: #4e7cfa;
+$color-primary-hover: #0f58f5;
+$color-accent: #10b981;
+$color-accent-hover: #059669;
+$color-bg-light: #ffffffc5;
+$color-bg-gradient-start: #f5f7fa;
+$color-bg-gradient-end: #c3cfe2;
+$color-text-muted: #6b7280;
+$color-text-dark: #1f2937;
+$color-card-bg: #ffffff;
+$color-result-bg: #e8f5e9;
+$color-result-title: #2e7d32;
+$color-border: #e5e7eb;
+$shadow-card: 0 8px 28px rgba(0, 0, 0, 0.08);
+$shadow-result: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+/* ========================================
+   📦 CONTAINER & LAYOUT
+======================================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px;
+
+  @media (max-width: 768px) {
+    padding: 16px 12px;
+  }
+}
+
+/* ========================================
+   🃏 CARD CONTAINER
+======================================== */
+mat-card {
+  max-width: 100%;
+  margin: 0 auto 24px;
+  padding: 32px;
+  border-radius: 16px;
+  background: $color-card-bg;
+  box-shadow: $shadow-card;
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
+
+  h3+mat-form-field,
+  h3+.form-grid {
+    margin-top: 6px;
+  }
+}
+
+/* ========================================
+   ✏️ TYPOGRAPHY
+======================================== */
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: $color-primary;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 28px 0 16px;
+  font-weight: 600;
+  color: $color-text-dark;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid $color-border;
+  padding-bottom: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+/* ========================================
+   📝 FORM STRUCTURE
+======================================== */
+.section {
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 720px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+input[matInput],
+textarea[matInput],
+mat-select {
+  font-size: 0.95rem;
+}
+
+/* ========================================
+   🎯 BUTTONS
+======================================== */
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  button {
+    flex: 1;
+    min-width: 200px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+}
+
+button[mat-raised-button] {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover:not([disabled]) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(0);
+  }
+}
+
+button[color="primary"] {
+  background: $color-primary;
+  color: #ffffff;
+
+  &:hover:not([disabled]) {
+    background: $color-primary-hover;
+  }
+}
+
+button[color="accent"] {
+  background: $color-accent;
+  color: #ffffff;
+
+  &:hover:not([disabled]) {
+    background: $color-accent-hover;
+  }
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none !important;
+}
+
+/* ========================================
+   ⏳ LOADING SPINNER
+======================================== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  margin: 32px 0;
+  background: linear-gradient(135deg, $color-bg-gradient-start 0%, $color-bg-gradient-end 100%);
+  border-radius: 16px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+    margin: 24px 0;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $color-primary;
+    animation: pulse 1.5s ease-in-out infinite;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  .loading-subtext {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: $color-text-muted;
+    margin-top: 8px;
+    animation: none;
+  }
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(78, 124, 250, 0.2);
+  border-top: 5px solid $color-primary;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 4px 12px rgba(78, 124, 250, 0.2);
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+/* ========================================
+   ✅ RISULTATO / OUTPUT
+======================================== */
+.output {
+  margin-top: 32px;
+  animation: fadeIn 0.6s ease-in;
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+  }
+}
+
+.result-card {
+  margin-top: 16px;
+  box-shadow: $shadow-result;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(46, 125, 50, 0.2);
+
+  mat-card-header {
+    background: $color-result-bg;
+    padding: 20px 24px;
+    border-bottom: 2px solid rgba(46, 125, 50, 0.3);
+
+    @media (max-width: 768px) {
+      padding: 16px 20px;
+    }
+
+    mat-card-title {
+      color: $color-result-title;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  mat-card-content {
+    padding: 0;
+  }
+
+  .result-content {
+    background: #fafafa;
+    padding: 24px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 600px;
+    overflow-y: auto;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-text-dark;
+    border: none;
+
+    @media (max-width: 768px) {
+      padding: 16px;
+      font-size: 0.9rem;
+      max-height: 500px;
+    }
+
+    /* Scrollbar personalizzata */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+
+      &:hover {
+        background: #a8a8a8;
+      }
+    }
+  }
+
+  mat-card-actions {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: center;
+    background: #f9fafb;
+    border-top: 1px solid $color-border;
+
+    @media (max-width: 768px) {
+      padding: 16px 20px;
+    }
+
+    button {
+      min-width: 180px;
+
+      @media (max-width: 768px) {
+        min-width: unset;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   ♿ ACCESSIBILITY
+======================================== */
+:focus-visible {
+  outline: 3px solid $color-primary;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ========================================
+   🎨 MATERIAL OVERRIDES
+======================================== */
+.mat-mdc-form-field {
+  --mdc-filled-text-field-container-color: $color-bg-light;
+  --mdc-filled-text-field-focus-active-indicator-color: $color-primary;
+  --mdc-filled-text-field-hover-active-indicator-color: $color-primary-hover;
+}
+
+.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom-color: $color-primary;
+}
+
+/* ========================================
+   🖨️ PRINT SUPPORT
+======================================== */
+@media print {
+
+  .loading-container,
+  .button-group,
+  mat-card-actions {
+    display: none !important;
+  }
+
+  button[mat-raised-button][color="primary"] {
+    background: $color-primary !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .result-content {
+    max-height: none;
+    overflow: visible;
+  }
+
+  mat-card {
+    box-shadow: none;
+    border: 1px solid $color-border;
+  }
+}
+
+/* ========================================
+   📱 RESPONSIVE UTILITIES
+======================================== */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  mat-card {
+    border-radius: 12px;
+  }
+}
