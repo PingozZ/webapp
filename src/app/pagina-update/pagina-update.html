@@ -66,14 +66,14 @@
 
     <!-- Pulsanti -->
     <div class="button-row">
-        <button mat-raised-button color="primary" (click)="inviaFeedback()" 
-                [disabled]="isLoading || !pdfFile || !feedback">
+        <button mat-raised-button color="primary" (click)="inviaFeedback()"
+            [disabled]="isLoading || !pdfFile || !feedback">
             <mat-icon>send</mat-icon>
             Invia aggiornamento
         </button>
-        
-        <button mat-raised-button color="accent" (click)="esportaPDF()" 
-                [disabled]="isLoading || !risultatoN8n || !risultatoN8n.trim()">
+
+        <button mat-raised-button color="accent" (click)="esportaPDF()"
+            [disabled]="isLoading || !risultatoN8n || !risultatoN8n.trim()">
             <mat-icon>picture_as_pdf</mat-icon>
             Esporta PDF
         </button>
@@ -82,6 +82,10 @@
             <mat-icon>refresh</mat-icon>
             Reset
         </button>
-    </div>
+       <!-- <button mat-raised-button color="accent" [routerLink]="['/Nutrizione']" [disabled]="isLoading">
+            🥑 Nutrizione
+        </button> -->
+        </div>
 
-</div>
+
+    </div>

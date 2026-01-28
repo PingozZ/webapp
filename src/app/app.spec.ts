@@ -18,10 +18,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-<<<<<<< HEAD
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Progetto');
-=======
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Progetto1');
->>>>>>> 1d9abef (webapp)
   });
 });

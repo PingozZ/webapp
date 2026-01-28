@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
+  standalone: true, // ✅ AGGIUNGI QUESTA RIGA
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   imports: [RouterOutlet, MatButtonModule, HttpClientModule, FormsModule]
 })
 export class App {
-  protected readonly title = signal('Progetto1'); // 
+  protected readonly title = signal('Progetto');
 }
