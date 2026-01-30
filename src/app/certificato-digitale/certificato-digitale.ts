@@ -56,7 +56,7 @@ export class CertificatoDigitale implements OnInit {
     try {
       console.log('🚀 Invio payload:', payload);
 
-        const response = await fetch('https://authority-accompanying-daily-visits.trycloudflare.com/webhook/certificato-digitale', {
+        const response = await fetch('https://interpreted-ink-cabin-cabin.trycloudflare.com/webhook/certificato-digitale', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
