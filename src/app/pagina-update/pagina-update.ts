@@ -47,7 +47,7 @@ export class UpdateSchedaComponent {
   isLoading: boolean = false;
   progressMessage: string = 'Inizializzazione...';
 
-  private readonly WEBHOOK_URL = 'http://localhost:5678/webhook/personal-update';
+  private readonly WEBHOOK_URL = 'https://authority-accompanying-daily-visits.trycloudflare.com/pagina-update';
   private readonly TIMEOUT_MS = 300000;
 
   constructor(

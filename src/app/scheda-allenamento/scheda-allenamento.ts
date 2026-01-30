@@ -49,7 +49,7 @@ export class SchedaAllenamento {
   risultatoN8n = '';
   isLoading = false;
 
-  private apiUrl = 'http://localhost:5678/webhook/personal-trainer';
+  private apiUrl = 'https://authority-accompanying-daily-visits.trycloudflare.com/webhook/personal-trainer';
 
   constructor(
     private http: HttpClient,

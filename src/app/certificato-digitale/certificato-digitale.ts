@@ -56,7 +56,7 @@ export class CertificatoDigitale implements OnInit {
     try {
       console.log('🚀 Invio payload:', payload);
 
-      const response = await fetch('http://localhost:5678/webhook/certificato-digitale', {
+        const response = await fetch('https://authority-accompanying-daily-visits.trycloudflare.com/webhook/certificato-digitale', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -70,13 +70,13 @@ export class CertificatoDigitale implements OnInit {
 
       if (result && result.otp) {
         this.serverOtp = result.otp.toString();
-       
+
         // Passa allo step 2
         this.step = 2;
-        
+
         // ✅ Forza il rilevamento dei cambiamenti
         this.cdr.detectChanges();
-        
+
       } else {
         console.error('❌ OTP mancante');
         this.errorMessage = 'Errore: OTP non ricevuto dal server.';
