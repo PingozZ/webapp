@@ -47,7 +47,7 @@ export class UpdateSchedaComponent {
   isLoading: boolean = false;
   progressMessage: string = 'Inizializzazione...';
 
-  private readonly WEBHOOK_URL = 'https://interpreted-ink-cabin-cabin.trycloudflare.com/pagina-update';
+  private readonly WEBHOOK_URL = 'https://interpreted-ink-cabin-cabin.trycloudflare.com/webhook/pagina-update';
   private readonly TIMEOUT_MS = 300000;
 
   constructor(
